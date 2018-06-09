@@ -1,0 +1,15 @@
+---DOCTOR---
+first
+last
+company
+username
+password
+email
+id
+
+---PATIENT---
+first
+last
+dob
+chain
+id
