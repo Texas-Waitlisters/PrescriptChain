@@ -1,3 +1,3 @@
-# ChainMail
+# PrescriptChain
 
-Made for Factom Blockchain Hackathon
+Made for Factom Blockchain Hackathon by the Waitlisters
