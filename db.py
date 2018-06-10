@@ -56,3 +56,6 @@ def createaccount(info):
             return x
     finally:
         connectionObject.close()
+
+def newpatient(info):
+

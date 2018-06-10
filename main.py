@@ -3,7 +3,7 @@ from flask_session import Session
 from users import User
 import json
 
-import accountcontrol as ac
+import db as ac
 
 app = Flask(__name__)
 
