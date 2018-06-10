@@ -1,11 +1,12 @@
 import pymysql
+from users import User
 
 dbServerName    = "localhost"
-dbUser          = "user"
-dbPassword      = ""
-dbName          = "test"
+dbUser          = "root"
+dbPassword      = "ilikecode"
+dbName          = "users"
 charSet         = "utf8mb4"
-cusrorType      = pymysql.cursors.DictCursor
+cursorType      = pymysql.cursors.DictCursor
 
 def login(username, password):
     connectionObject = pymysql.connect(host = dbServerName,
@@ -13,22 +14,22 @@ def login(username, password):
                                  password = dbPassword,
                                  db = dbName,
                                  charset = charSet,
-                                 cursorclass = cusrorType)
+                                 cursorclass = cursorType)
     try:
         with connectionObject.cursor() as cursor:
-        query = "SELECT * FROM USERS WHERE username = "+username+" " \
-                "AND password = "+password+""
-        # countquery = "SELECT COUNT(*) FROM USERS WHERE username = "+username+" " \
-        #         "AND password = "+password+""
-        cursor.execute(query)
-        # cursor.execute(countquery)
-        rows = cursor.fetchall()
-        count = cursor.rowcount
+            query = "SELECT * FROM users WHERE username=\""+username+"\" AND password = \""+password+"\""
+            # countquery = "SELECT COUNT(*) FROM USERS WHERE username = "+username+" " \
+            #         "AND password = "+password+""
+            cursor.execute(query)
+            # cursor.execute(countquery)
+            rows = cursor.fetchall()
+            count = cursor.rowcount
+            print(rows[0])
+            if (count == 0):
+                return None
+            elif (count > 0):
+                return type('User', (), rows[0])
 
-        if (count == 0)
-            return None
-        elif (count > 0)
-            rows.index(1)
             return
 
 
@@ -38,4 +39,4 @@ def login(username, password):
     finally:
         connectionObject.close()
 
-def createaccount():
+#def createaccount():
