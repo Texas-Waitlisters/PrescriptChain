@@ -18,8 +18,6 @@ def index():
     user = None
     if('user' in session):
         user = session['user']
-    if(user != None and user['logged_in']):
-        print(user['username'])
     return render_template('index.html')
 
 @app.route('/login', methods=['POST'])
@@ -31,6 +29,9 @@ def login():
     print(type(rs))
     if(rs != None):
         session['user'] = rs
+    else:
+        return "Login information invalid."
+    session['user']['logged_in'] = True
     return redirect(url_for('index'))
 
 @app.route("/logout")
@@ -54,6 +55,8 @@ def createAccount():
 # Add prescription to blockchain
 @app.route('/createChain', methods=['POST'])
 def createChain():
+    if(not 'user' in session or session['user']==None or not session['user']['logged_in']):
+        return "You must be logged in to perform this operation"
     result = ac.readchain(request.form)
     print(result)
     if result == False:
@@ -72,6 +75,8 @@ def createChain():
 # Read and validate prescription in blockchain
 @app.route('/getChain', methods=['POST'])
 def getChain():
+    if(not 'user' in session or session['user']==None or not session['user']['logged_in']):
+        return "You must be logged in to perform this operation"
     data_entry = {"firstx" : request.form['PatientsFirst'], "lastx": request.form['PatientsLast']}
     result = ac.readchain(data_entry)
     if result == False:
