@@ -30,7 +30,6 @@ def login():
     if(rs != None):
         session['user'] = rs
     return redirect(url_for('index'))
-    return render_template('login.html')
 
 @app.route("/logout")
 def logout():
@@ -47,7 +46,8 @@ def createAccount():
     email = request.form['email']
     acc_type = request.form['type']
     user = {'username':username,'password':password,'last':last,'first':first,'company':company, 'email':email,'type':acc_type}
-    return user
+    createaccount(user)
+    return redirect(url_for('index'))
 
 @app.route('/createChain')
 def createChain():

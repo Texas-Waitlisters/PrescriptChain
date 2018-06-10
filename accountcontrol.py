@@ -41,4 +41,18 @@ def login(username, password):
     finally:
         connectionObject.close()
 
-#def createaccount():
+def createaccount(info):
+
+    connectionObject = pymysql.connect(host = dbServerName,
+                                 user = dbUser,
+                                 password = dbPassword,
+                                 db = dbName,
+                                 charset = charSet,
+                                 cursorclass = cursorType)
+    try:
+        with connectionObject.cursor() as cursor:
+            query = "INSERT INTO users (username, password, last, first, company, email, type) VALUES (\""+info['username']+"\",\""+info['password']+"\",\""+info['last']+"\",\""+info['first']+"\",\""+info['company']+"\",\""+info['email']+"\",\""+info['type']+"\")"
+            x = cursor.execute(query)
+            return x
+    finally:
+        connectionObject.close()
