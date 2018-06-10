@@ -51,10 +51,12 @@ def createaccount(info):
                                  cursorclass = cursorType)
     try:
         with connectionObject.cursor() as cursor:
-            query = "INSERT INTO users (username, password, last, first, company, email, type) VALUES (\""+info['username']+"\",\""+info['password']+"\",\""+info['last']+"\",\""+info['first']+"\",\""+info['company']+"\",\""+info['email']+"\",\""+info['type']+"\")"
+            query = "INSERT INTO users (username, password, last, first, company, email, type) VALUES (\""+info['username']+"\",\""+info['password']+"\",\""+info['last']+"\",\""+info['first']+"\",\""+info['company']+"\",\""+info['email']+"\","+info['type']+")"
+            print(query)
             x = cursor.execute(query)
             return x
     finally:
+        connectionObject.commit()
         connectionObject.close()
 
 def readchain(info):
@@ -66,7 +68,7 @@ def readchain(info):
                                  cursorclass = cursorType)
     try:
         with connectionObject.cursor() as cursor:
-            query = "SELECT * FROM patients WHERE first=\""+info['first']+"\"" AND last=\""+info['last']+"\""
+            query = "SELECT * FROM patients WHERE first=\""+info['firstx']+"\" AND last=\""+info['lastx']+"\""
             cursor.execute(query)
             rows = cursor.fetchall()
             if(cursor.rowcount==0):
@@ -85,10 +87,12 @@ def writechain(info):
                                  cursorclass = cursorType)
     try:
         with connectionObject.cursor() as cursor:
-            query = "INSERT INTO patients (first, last, chain_id) VALUES (\""+info['first']+"\",\""+info['last']+"\",\""+info['chain_id']+"\"");
+            query = "INSERT INTO patients (first, last, chain) VALUES (\""+info['first']+"\",\""+info['last']+"\",\""+info['chain']+"\")";
+            print(query)
             x = cursor.execute(query)
             return x
     finally:
+        connectionObject.commit()
         connectionObject.close()
 
 # TODO refactor patient_id to be prescription_id
@@ -102,7 +106,7 @@ def readprescription(info):
                                  cursorclass = cursorType)
     try:
         with connectionObject.cursor() as cursor:
-            query = "SELECT * FROM meds WHERE patient_id=\""+info['patient_id']+"\" AND meds=\""+info['meds']+"\""
+            query = "SELECT * FROM meds WHERE patient_id=\""+info['patient_id']+"\" AND med=\""+info['prescription_id']+"\""
             cursor.execute(query)
             rows = cursor.fetchall()
             if(cursor.rowcount==0):
@@ -120,9 +124,9 @@ def gethighest():
                                  cursorclass = cursorType)
     try:
         with connectionObject.cursor() as cursor:
-            query = "SELECT IDENT_CURRENT('meds')");
+            query = "SELECT MAX(id) FROM users";
             x = cursor.execute(query)
-            return cursor.fetchall()[0]+1
+            return cursor.fetchall()[0]['MAX(id)']
     finally:
         connectionObject.close()
 
@@ -135,8 +139,10 @@ def writeprescription(info):
                                  cursorclass = cursorType)
     try:
         with connectionObject.cursor() as cursor:
-            query = "INSERT INTO meds (patient_id, meds) VALUES (\""+info['patient_id']+"\",\""+info['hash']+"\"");
+            query = "INSERT INTO meds (patient_id, hash, med) VALUES ("+str(info['patient_id'])+",\""+info['hash']+"\", \""+str(info['prescription_id'])+"\")";
+            print(query)
             x = cursor.execute(query)
             return x
     finally:
+        connectionObject.commit()
         connectionObject.close()

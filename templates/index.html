@@ -1,22 +1,233 @@
-<!doctype html>
-
-<html lang="en">
-
-<head>
-		  <meta charset="utf-8">
-		  
-		    <title>The HTML5 Herald</title>
-			  <meta name="description" content="The HTML5 Herald">
-			    <meta name="author" content="SitePoint">
-				
-				  <link rel="stylesheet" href="css/styles.css?v=1.0">
-				  
-				    <!--[if lt IE 9]>
-						      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
-						    <![endif]-->
+<!DOCTYPE HTML>
+<!--
+	Astral by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+    <title>PrescriptChain Finder</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Mobile App stuffs -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PrescriptChain">
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
+    <noscript><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/noscript.css')}}" /></noscript>
+    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='images/icons/apple-icon-57x57.png')}}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='images/icons/apple-icon-60x60.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='images/icons/apple-icon-72x72.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='images/icons/apple-icon-76x76.png')}}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='images/icons/apple-icon-114x114.png')}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='images/icons/apple-icon-120x120.png')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='images/icons/apple-icon-144x144.png')}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='images/icons/apple-icon-152x152.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/icons/apple-icon-180x180.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='images/icons/android-icon-192x192.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/icons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='images/icons/favicon-96x96.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/icons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{ url_for('static', filename='images/icons/manifest.json')}}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ url_for('static', filename='/images/icons/ms-icon-144x144.png')}}">
+    <meta name="theme-color" content="#ffffff">
 </head>
 
 <body>
-	<h1>title</h1>
+
+    <!-- Wrapper-->
+    <div id="wrapper">
+
+        <!-- Nav -->
+        <nav id="nav">
+            <a href="#Home" class="icon fa-home active"><span>Home</span></a>
+            <a href="#Login" class="icon fa-sign-in"><span>Login</span></a>
+            <a href="#SignUp" class="icon fa-user-plus"><span>Sign Up</span></a>
+            <a href="#Create" class="icon fa-user-md"><span>Create</span></a>
+            <a href="#Find" class="icon fa-user"><span>Enter</span></a>
+        </nav>
+
+        <!-- Main -->
+        <div id="main">
+
+            <!-- Landing -->
+            <article id="Home" class="panel">
+                <header>
+                    <h1 style="color: #66a3ff;">Welcome</h1>
+                    <!-- <p>Find your patients' prescription fast</p> -->
+                </header>
+                <a href="#Login" class="jumplink pic">
+									<span class="arrow icon fa-chevron-right"><span>Login</span></span>
+									<img src="{{ url_for('static', filename='images/PrescriptChain_Logo.png')}}" alt="" />
+								</a>
+                <header>
+                    <p>Find your patients' prescription fast</p>
+                </header>
+            </article>
+
+            <!-- Login -->
+            <article id="Login" class="panel">
+
+
+                <section>
+                    <div class="row">
+
+                    </div>
+                </section>
+                <div id="login" class="animate form">
+                    <form action="{{ url_for('login') }}" autocomplete="on" method="POST">
+                        <h1>Login</h1>
+                        <p>
+                            <label for="username" class="uname" data-icon="u"> Email or username </label>
+                            <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com" />
+                        </p>
+                        <p>
+                            <label for="password" class="youpasswd" data-icon="p"> Password </label>
+                            <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+                        </p>
+                        <p class="keeplogin">
+                            <label for="loginkeeping"><input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> Keep me logged in</label>
+                            <!-- <label for="loginkeeping">Keep me logged in</label> -->
+                        </p>
+                        <p class="login button">
+                            <input type="submit" value="Login" />
+                        </p>
+                        <p class="change_link">
+                            Not a member yet ?
+                            <a href="#toregister" class="to_register">Join us</a>
+                        </p>
+                    </form>
+                </div>
+            </article>
+
+            <!-- Sign Up -->
+            <article id="SignUp" class="panel">
+
+                <div id="register" class="animate form">
+                    <form action="{{ url_for('createAccount') }}" autocomplete="on" method="POST">
+                        <h1> Sign up </h1>
+                        <p>
+                            <label for="usernamesignup" class="uname" data-icon="u">Username</label>
+                            <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername" />
+                        </p>
+                        <p>
+                            <label for="emailsignup" class="youmail" data-icon="e"> Email</label>
+                            <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="example@mail.com" />
+                        </p>
+                        <p>
+                            <label for="firstsignup" class="youfirst" data-icon="e"> First Name</label>
+                            <input id="firstsignup" name="firstsignup" required="required" type="text" placeholder="John" />
+                        </p>
+                        <p>
+                            <label for="lastsignup" class="youlast" data-icon="e"> Last Name</label>
+                            <input id="lastsignup" name="lastsignup" required="required" type="text" placeholder="Doe" />
+                        </p>
+                        <p>
+                            <label for="companysignup" class="youcompany" data-icon="e"> Company</label>
+                            <input id="companysignup" name="companysignup" required="required" type="text" placeholder="Company" />
+                        </p>
+                        <p>
+                            <label for="passwordsignup" class="youpasswd" data-icon="p">Password </label>
+                            <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO" />
+                        </p>
+                        <p>
+                            <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
+                            <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO" />
+                        </p>
+                        <p class="signin button">
+                            <input type="submit" value="Sign up" />
+                        </p>
+                        <p class="change_link">
+                            Already a member ?
+                            <a href="#tologin" class="to_register"> Login </a>
+                        </p>
+                    </form>
+                </div>
+            </article>
+            
+            
+            
+            
+            <!-- Create -->
+            <article id="Create" class="panel">
+
+                <div id="register" class="animate form">
+                    <form action="{{ url_for('createChain') }}" autocomplete="on" method="POST">
+                        <h1> Create Prescription </h1>
+                        <p>
+                            <label for="firstx" class="uname" data-icon="u">First Name of Patient</label>
+                            <input id="firstx" name="firstx" required="required" type="text" placeholder="John" />
+                        </p>
+                        <p>
+                            <label for="lastx" class="uname" data-icon="u">Last Name of Patient</label>
+                            <input id="lastx" name="lastx" required="required" type="text" placeholder="Doe" />
+                        </p>
+                        <p>
+                            <label for="meds" class="youmail" data-icon="e"> Prescription</label>
+                            <input id="meds" name="meds" required="required" type="text" placeholder="" />
+                        </p>
+                        <p class="signin button">
+                            <input type="submit" value="Submit" />
+                        </p>
+                    </form>
+                </div>
+            </article>
+            
+            
+            
+            <!-- Find -->
+            <article id="Find" class="panel">
+
+                <div id="Finder" class="animate form">
+                    <form action="{{ url_for('getChain') }}" autocomplete="on" method="POST">
+                        <h1> Find your patients prescription </h1>
+                        <p>
+                            <label for="PatientsFirst" class="uname" data-icon="u">Patients First Name</label>
+                            <input id="PatientsFirst" name="PatientsFirst" required="required" type="text" placeholder="John" />
+                        </p>
+                        <p>
+                            <label for="PatientsLast" class="youmail" data-icon="e"> Patients Last Name</label>
+                            <input id="PatientsLast" name="PatientsLast" required="required" type="text" placeholder="Doe" />
+                        </p>
+                        <p>
+                            <label for="Prescription" class="youpasswd" data-icon="p">Prescription ID</label>
+                            <input id="Prescription" name="Prescription" required="required" type=text" placeholder="" />
+                        </p>
+                        <p class="signin button">
+                            <input type="submit" value="Find" />
+                        </p>
+                    </form>
+                </div>
+            </article>
+            
+            
+            
+            
+            
+            
+
+        </div>
+
+        <!-- Footer -->
+        <div id="footer">
+            <ul class="copyright">
+                &copy; PrescriptChain. Built by: <a href="waitlisters.org">the Waitlisters</a>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='assets/js/jquery.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/js/skel.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/js/skel-viewport.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/js/util.js')}}"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+
 </body>
 </html>
