@@ -57,5 +57,69 @@ def createaccount(info):
     finally:
         connectionObject.close()
 
-def newpatient(info):
+def readchain(info):
+    connectionObject = pymysql.connect(host = dbServerName,
+                                 user = dbUser,
+                                 password = dbPassword,
+                                 db = dbName,
+                                 charset = charSet,
+                                 cursorclass = cursorType)
+    try:
+        with connectionObject.cursor() as cursor:
+            query = "SELECT * FROM patients WHERE first=\""+info['first']+"\"" AND last=\""+info['last']+"\""
+            cursor.execute(query)
+            rows = cursor.fetchall()
+            if(cursor.rowcount==0):
+                return False;
+            return rows[0];
+    finally:
+        connectionObject.close()
 
+
+def writechain(info):
+    connectionObject = pymysql.connect(host = dbServerName,
+                                 user = dbUser,
+                                 password = dbPassword,
+                                 db = dbName,
+                                 charset = charSet,
+                                 cursorclass = cursorType)
+    try:
+        with connectionObject.cursor() as cursor:
+            query = "INSERT INTO patients (first, last, chain_id) VALUES (\""+info['first']+"\",\""+info['last']+"\",\""+info['chain_id']+"\"");
+            x = cursor.execute(query)
+            return x
+    finally:
+        connectionObject.close()
+
+def readprescription(info):
+    connectionObject = pymysql.connect(host = dbServerName,
+                                 user = dbUser,
+                                 password = dbPassword,
+                                 db = dbName,
+                                 charset = charSet,
+                                 cursorclass = cursorType)
+    try:
+        with connectionObject.cursor() as cursor:
+            query = "SELECT * FROM meds WHERE patient_id=\""+info['patient_id']+"\" AND meds=\""+info['meds']+"\""
+            cursor.execute(query)
+            rows = cursor.fetchall()
+            if(cursor.rowcount==0):
+                return False;
+            return rows[0];
+    finally:
+        connectionObject.close()
+
+def writeprescription(info):
+    connectionObject = pymysql.connect(host = dbServerName,
+                                 user = dbUser,
+                                 password = dbPassword,
+                                 db = dbName,
+                                 charset = charSet,
+                                 cursorclass = cursorType)
+    try:
+        with connectionObject.cursor() as cursor:
+            query = "INSERT INTO meds (patient_id, meds) VALUES (\""+info['patient_id']+"\",\""+info['meds']+"\"");
+            x = cursor.execute(query)
+            return x
+    finally:
+        connectionObject.close()
