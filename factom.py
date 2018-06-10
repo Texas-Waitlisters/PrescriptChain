@@ -3,7 +3,6 @@ import base64
 import datetime
 import json
 import unittest
-# import nosetest
 
 API = 'https://apiplus-api-sandbox-testnet.factom.com/v1'
 
@@ -54,7 +53,9 @@ def get_entry(chain_id, entry_hash="last"):
     response = requests.get("{}/chains/{}/entries/{}".format(API, chain_id, entry_hash), 
                headers=HEADERS)
     if response.status_code == 200:
-        return response.json()
+        result = response.json()
+        result["content"] = _b64decode(result["content"])
+        return result
     return { "entry_hash" : None, "content" : None }
 
 # Unit tests 
@@ -89,10 +90,23 @@ class FactomAPITest(unittest.TestCase):
         print("\nInput = {} \nOutput = {}".format(data, output))
         self.assertEqual(expected, output)
 
-    def test_create_new_chain(self):
-        data = (["foo", "bar"], "content")
-        chain_id = create_new_chain(*data)
-        print("\nChain ID = {}".format(chain_id))
+    def test_create_chain(self):
+        data = ("foobar", "content")
+        output = create_new_chain(*data)
+        chain_id = output["chain_id"]
+        print("\nChain ID = {}\nEntry Hash = {}".format(chain_id, output["entry_hash"]))
+        print("\nThis Entry In Chain = {}".format(get_entry(chain_id, output["entry_hash"])))
+        data = (chain_id,"foobar", "more content")
+        output = add_to_chain(*data)
+        print("\nEntry Hash = {}".format(output["entry_hash"]))
+        print("\nThis Entry In Chain = {}".format(get_entry(chain_id, output["entry_hash"])))
+        data = (chain_id,"foobar", "last content")
+        output = add_to_chain(*data)
+        print("\nEntry Hash = {}".format(output["entry_hash"]))
+        print("\nLast Entry In Chain = {}".format(get_entry(chain_id)))
+        print("\nChain Entries = {}".format(get_chain(chain_id)))
+        print("\nThis Entry In Chain = {}".format(get_entry(chain_id, output["entry_hash"])))
+        print("\nFake Entry In Chain = {}".format(get_entry(chain_id, 926379234)))
         self.assertTrue(True)
 
 if __name__ == "__main__":
