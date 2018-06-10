@@ -124,7 +124,7 @@ def gethighest():
                                  cursorclass = cursorType)
     try:
         with connectionObject.cursor() as cursor:
-            query = "SELECT MAX(id) FROM users";
+            query = "SELECT MAX(id) FROM meds";
             x = cursor.execute(query)
             return cursor.fetchall()[0]['MAX(id)']
     finally:
