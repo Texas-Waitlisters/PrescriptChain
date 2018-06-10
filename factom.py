@@ -19,7 +19,9 @@ def unix_timestamp():
 
 def _json_block_payload(external_ids, content):
     payload = dict()
-    payload["external_ids"] = []
+    payload["external_ids"] = [_base64(_id) for _id in external_ids]
+    payload["content"] = _base64(content)
+    return json.dumps(payload)
 
 # Create new blockchain and return the chain id
 def create_new_chain(external_ids, temp):
@@ -39,8 +41,9 @@ class FactomAPITest(unittest.TestCase):
         self.assertTrue(True)
 
     def test_json_block_payload(self):
-        print("Test not implemented")
-        self.assertTrue(True)
+        expected = {"external_ids" : ["Zm9v", "YmFy"], "content" : "Y29udGVudA=="}
+        output = _json_block_payload(["foo", "bar"], "content")
+        self.assertEqual(expected, json.loads(output))
 
 if __name__ == "__main__":
     unittest.main()
