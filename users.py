@@ -1,4 +1,4 @@
-class users:
+class User(object):
     first = None
     last = None
     company = None

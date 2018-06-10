@@ -1,25 +1,33 @@
-from flask import Flask, jsonify, request, render_template
-from users import user
-import accountControl as ac
+from flask import Flask, jsonify, request, render_template, session
+from flask_session import Session
+from users import User
+import json
+
+#import accountControl as ac
 
 app = Flask(__name__)
 
-SESSION_TYPE = 'redis'
+app.config['SESSION_TYPE'] = 'redis'
 app.config.from_object(__name__)
+app.secret_key = '12345'
 Session(app)
-Session['user'] = user()
-
 @app.route('/')
 def index():
-    return render_template('index.html')
+    session.secret_key = '67890'
+    session['user'] = vars(User())
+    user = type('User', (), session['user'])
+    print(session['user'])
+    print(user)
+    return render_template('login.html')
 
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form['username']
     password = request.form['password']
-    rs = ac.login(username, password)
-    if(rs != null):
-        Session['user'] = rs
+    #rs = ac.login(username, password)
+    #if(rs != null):
+    #    Session['user'] = rs
+    return render_template('login.html')
     return redirect(url_for('index'))
 
 @app.route('/createAccount')
@@ -34,3 +42,4 @@ def createChain():
 def getChain():
     return ''
 
+app.run(host='0.0.0.0')
