@@ -62,6 +62,7 @@ def createChain():
     else:
         data = (result['chain'], [str(ac.gethighest() + 1)], request.form['meds'])
         output = factom.add_to_chain(*data)
+    result = ac.readchain(request.form)
     data_entry = {"prescription_id" : (ac.gethighest() + 1), "hash" : output["entry_hash"], "patient_id" : result['id']}
     ac.writeprescription(data_entry)
     return redirect(url_for('index'))
