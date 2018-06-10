@@ -64,7 +64,7 @@ def createChain():
         output = factom.add_to_chain(*data)
     data_entry = {"prescription_id" : (ac.gethighest() + 1), "hash" : output["entry_hash"], "patient_id" : result['id']}
     ac.writeprescription(data_entry)
-    return redirect(url_for('index'))
+    return "Successful : Prescription ID = {}".format(data_entry["prescription_id"]) 
 
 # Read and validate prescription in blockchain
 @app.route('/getChain', methods=['POST'])
