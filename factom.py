@@ -37,15 +37,25 @@ def create_new_chain(external_ids, content):
     return response.json()
 
 # Add to block chain with chain_id and return entry_hash
+def get_chain(chain_id):
+    response = requests.get("{}/chains/{}/entries".format(API, chain_id),
+               headers=HEADERS)
+    return response.json()
+
+# Add to block chain with chain_id and return entry_hash
 def add_to_chain(chain_id, external_ids, content):
     response = requests.post("{}/chains/{}/entries".format(API, chain_id),
                json=_block_payload(external_ids, content), headers=HEADERS)
     return response.json()
 
 # Get entry specified entry_hash of block, can specify hash, first, or last by default
+# If block not found, return None
 def get_entry(chain_id, entry_hash="last"):
-    response = requests.get("{}/chains/{}/entries/first", headers=HEADERS)
-    return response.json() 
+    response = requests.get("{}/chains/{}/entries/{}".format(API, chain_id, entry_hash), 
+               headers=HEADERS)
+    if response.status_code == 200:
+        return response.json()
+    return { "entry_hash" : None, "content" : None }
 
 # Unit tests 
 class FactomAPITest(unittest.TestCase):
