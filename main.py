@@ -15,7 +15,9 @@ Session(app)
 @app.route('/')
 def index():
     session.secret_key = '67890'
-    user = session['user']
+    user = None
+    if('user' in session):
+        user = session['user']
     if(user != None and user['logged_in']):
         print(user['username'])
     return render_template('index.html')
