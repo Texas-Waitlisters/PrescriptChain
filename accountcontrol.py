@@ -28,7 +28,9 @@ def login(username, password):
             if (count == 0):
                 return None
             elif (count > 0):
-                return type('User', (), rows[0])
+                rows[0]['logged_in'] = True
+                print(rows[0])
+                return rows[0]
 
             return
 

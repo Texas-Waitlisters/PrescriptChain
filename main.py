@@ -1,9 +1,9 @@
-from flask import Flask, jsonify, request, render_template, session
+from flask import Flask, jsonify, request, render_template, session, redirect, url_for
 from flask_session import Session
 from users import User
 import json
 
-#import accountControl as ac
+import accountcontrol as ac
 
 app = Flask(__name__)
 
@@ -14,20 +14,27 @@ Session(app)
 @app.route('/')
 def index():
     session.secret_key = '67890'
-    session['user'] = vars(User())
-    user = type('User', (), session['user'])
-    print(session['user'])
-    print(user)
+    user = session['user']
+    if(user != None and user['logged_in']):
+        print(user['first'])
+        return render_template('index.html')
     return render_template('login.html')
 
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form['username']
     password = request.form['password']
-    #rs = ac.login(username, password)
-    #if(rs != null):
-    #    Session['user'] = rs
+    rs = ac.login(username, password)
+    print(rs)
+    print(type(rs))
+    if(rs != None):
+        session['user'] = rs
+    return redirect(url_for('index'))
     return render_template('login.html')
+
+@app.route("/logout")
+def logout():
+    session['user'] = None
     return redirect(url_for('index'))
 
 @app.route('/createAccount', methods=['POST'])
