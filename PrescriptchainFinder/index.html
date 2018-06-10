@@ -9,10 +9,28 @@
 		<title>PrescriptChain Finder</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<link rel="apple-touch-icon" sizes="57x57" href="images/icons/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="images/icons/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="images/icons/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="images/icons/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="images/icons/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="images/icons/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="images/icons/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="images/icons/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="images/icons/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="images/icons/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/icons/favicon-16x16.png">
+		<link rel="manifest" href="images/icons/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
 	</head>
 	<body>
 
@@ -33,11 +51,11 @@
 						<!-- Landing -->
 							<article id="me" class="panel">
 								<header>
-									<h1>Welcom to</h1>
+									<h1 style="color: #66a3ff;">Welcome to</h1>
 									<!-- <p>Find your patients' prescription fast</p> -->
 								</header>
 								<a href="#work" class="jumplink pic">
-									<span class="arrow icon fa-chevron-right"><span>See my work</span></span>
+									<span class="arrow icon fa-chevron-right"><span>Login</span></span>
 									<img src="images/PrescriptChain_Logo.png" alt="" />
 								</a>
 								<header>
@@ -57,16 +75,16 @@
 			<form  action="mysuperscript.php" autocomplete="on">
 				<h1>Login</h1>
 				<p>
-					<label for="username" class="uname" data-icon="u" > Your email or username </label>
+					<label for="username" class="uname" data-icon="u" > Email or username </label>
 					<input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com"/>
 				</p>
 				<p>
-					<label for="password" class="youpasswd" data-icon="p"> Your password </label>
+					<label for="password" class="youpasswd" data-icon="p"> Password </label>
 					<input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
 				</p>
 				<p class="keeplogin">
-					<input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
-					<label for="loginkeeping">Keep me logged in</label>
+					<label for="loginkeeping"><input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> Keep me logged in</label>
+					<!-- <label for="loginkeeping">Keep me logged in</label> -->
 				</p>
 				<p class="login button">
 					<input type="submit" value="Login" />
@@ -86,15 +104,15 @@
 			<form  action="mysuperscript.php" autocomplete="on">
 				<h1> Sign up </h1>
 				<p>
-					<label for="usernamesignup" class="uname" data-icon="u">Your username</label>
+					<label for="usernamesignup" class="uname" data-icon="u">Username</label>
 					<input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
 				</p>
 				<p>
-					<label for="emailsignup" class="youmail" data-icon="e" > Your email</label>
+					<label for="emailsignup" class="youmail" data-icon="e" > Email</label>
 					<input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/>
 				</p>
 				<p>
-					<label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
+					<label for="passwordsignup" class="youpasswd" data-icon="p">Password </label>
 					<input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
 				</p>
 				<p>
@@ -106,7 +124,7 @@
 				</p>
 				<p class="change_link">
 					Already a member ?
-					<a href="#tologin" class="to_register"> Go and log in </a>
+					<a href="#tologin" class="to_register"> Login </a>
 				</p>
 			</form>
 		</div>
@@ -117,7 +135,7 @@
 				<!-- Footer -->
 					<div id="footer">
 						<ul class="copyright">
-							<li>&copy; PrescriptChain.</li><li>Built with love by: <a href="Waitlisters.org">The Waitlisters</a></li>
+							&copy; PrescriptChain. Built by: <a href="waitlisters.org">the Waitlisters</a>
 						</ul>
 					</div>
 

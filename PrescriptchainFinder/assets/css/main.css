@@ -774,7 +774,7 @@
 
 	strong, b, h1, h2, h3, h4, h5, h6 {
 		font-weight: 400;
-		color: #363636;
+		color: #66a3ff;
 	}
 
 	blockquote {
@@ -843,7 +843,7 @@
 	form label {
 		display: block;
 		font-weight: 400;
-		color: #363636;
+		color: #737373;
 		margin: 0 0 1em 0;
 	}
 
@@ -905,7 +905,7 @@
 		}
 
 	header > p {
-		color: #aaa;
+		color: #737373;
 	}
 
 /* Image */
@@ -954,7 +954,7 @@
 	.button {
 		-webkit-appearance: none;
 		display: inline-block;
-		background-color: #222222;
+		background-color: #66a3ff;
 		color: #ffffff;
 		border: 0;
 		cursor: pointer;
@@ -970,7 +970,7 @@
 		input[type="reset"]:hover,
 		button:hover,
 		.button:hover {
-			background-color: #333333;
+			background-color: #0066ff;
 		}
 
 		input[type="button"]:active,
@@ -1191,7 +1191,7 @@
 			input[type="reset"],
 			button,
 			.button {
-				padding: 0.7em 1.5em 0.7em 1.5em;
+				padding: 0.25em 1.0em 0.25em 1.0em;
 			}
 
 				input[type="button"].small,
