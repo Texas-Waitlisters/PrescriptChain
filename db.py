@@ -91,6 +91,8 @@ def writechain(info):
     finally:
         connectionObject.close()
 
+# TODO refactor patient_id to be prescription_id
+
 def readprescription(info):
     connectionObject = pymysql.connect(host = dbServerName,
                                  user = dbUser,

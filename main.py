@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, render_template, session, redirect, u
 from flask_session import Session
 from users import User
 import json
+import factom
 
 import db as ac
 
@@ -49,12 +50,33 @@ def createAccount():
     createaccount(user)
     return redirect(url_for('index'))
 
-@app.route('/createChain')
+# Add prescription to blockchain
+@app.route('/createChain', methods=['POST'])
 def createChain():
-    return ''
+    result = ac.readchain(request.form)
+    if result == False:
+        data = ((ac.gethighest() + 1), request.form['prescription'])
+        output = factom.create_new_chain(*data)
+        data_entry = {"first" : requests.form['first'], "last": requests.form['last'], "chain_id": output['chain_id']}
+        ac.writechain(data_entry)
+    else:
+        data = (result['chain_id'], (ac.gethighest() + 1), request.form['prescription'])
+        output = factom.add_to_blockchain(*data)
+    data_entry = {"prescription_id" : (ac.gethighest() + 1), "hash" : output["entry_hash"]}
+    ac.writeprescription(data_entry)
 
-@app.route('/getChain')
+# Read and validate prescription in blockchain
+@app.route('/getChain', methods=['POST'])
 def getChain():
-    return ''
+    result = ac.readchain(request.form)
+    if result == False:
+        return "Patient not found in records"
+    chain_id = result['chain_id']
+    _hash = ac.readprescription({"prescription_id": request.form["prescription_id"]})["hash"]
+    if _hash == False:
+        return "Prescription not found in records"
+    prescription = factom.get_entry(chain_id, _hash)
+    if prescription:
+        return prescription
 
 app.run(host='0.0.0.0')
