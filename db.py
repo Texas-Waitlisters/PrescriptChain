@@ -109,6 +109,21 @@ def readprescription(info):
     finally:
         connectionObject.close()
 
+def gethighest():
+    connectionObject = pymysql.connect(host = dbServerName,
+                                 user = dbUser,
+                                 password = dbPassword,
+                                 db = dbName,
+                                 charset = charSet,
+                                 cursorclass = cursorType)
+    try:
+        with connectionObject.cursor() as cursor:
+            query = "SELECT IDENT_CURRENT('meds')");
+            x = cursor.execute(query)
+            return cursor.fetchall()[0]+1
+    finally:
+        connectionObject.close()
+
 def writeprescription(info):
     connectionObject = pymysql.connect(host = dbServerName,
                                  user = dbUser,
@@ -118,7 +133,7 @@ def writeprescription(info):
                                  cursorclass = cursorType)
     try:
         with connectionObject.cursor() as cursor:
-            query = "INSERT INTO meds (patient_id, meds) VALUES (\""+info['patient_id']+"\",\""+info['meds']+"\"");
+            query = "INSERT INTO meds (patient_id, meds) VALUES (\""+info['patient_id']+"\",\""+info['hash']+"\"");
             x = cursor.execute(query)
             return x
     finally:
