@@ -22,9 +22,17 @@ def login():
         Session['user'] = rs
     return redirect(url_for('index'))
 
-@app.route('/createAccount')
-def createAccount():
-    return ''
+@app.route('/createAccount', methods=['POST'])
+def createAccount(): 
+    username = request.form['username']
+    password = request.form['password']
+    last = request.form['last']
+    first = request.form['first']
+    company = request.form['company']
+    email = request.form['email']
+    acc_type = request.form['type']
+    user = {'username':username,'password':password,'last':last,'first':first,'company':company, 'email':email,'type':acc_type}
+    return user
 
 @app.route('/createChain')
 def createChain():
