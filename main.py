@@ -57,12 +57,12 @@ def createChain():
     result = ac.readchain(request.form)
     print(result)
     if result == False:
-        data = ([str((ac.gethighest() + 1))], request.form['meds'])
+        data = (["{} :: {}".format((ac.gethighest() + 1), factom._unix_timestamp())], request.form['meds'])
         output = factom.create_new_chain(*data)
         data_entry = {"first" : request.form['firstx'], "last": request.form['lastx'], "chain": output['chain_id']}
         ac.writechain(data_entry)
     else:
-        data = (result['chain'], [str(ac.gethighest() + 1)], request.form['meds'])
+        data = (result['chain'], ["{} :: {}".format((ac.gethighest() + 1), factom._unix_timestamp())], request.form['meds'])
         output = factom.add_to_chain(*data)
     result = ac.readchain(request.form)
     data_entry = {"prescription_id" : (ac.gethighest() + 1), "hash" : output["entry_hash"], "patient_id" : result['id']}
