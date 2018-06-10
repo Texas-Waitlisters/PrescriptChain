@@ -24,7 +24,6 @@ def login(username, password):
             # cursor.execute(countquery)
             rows = cursor.fetchall()
             count = cursor.rowcount
-            print(rows[0])
             if (count == 0):
                 return None
             elif (count > 0):
