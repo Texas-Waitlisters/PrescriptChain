@@ -80,7 +80,7 @@ def getChain():
         return "Prescription not found in records"
     prescription = factom.get_entry(chain_id, _hash['hash'])
     if prescription:
-        return str(prescription) 
+        return prescription['content']
     return "Prescription not found"
 
 app.run(host='0.0.0.0')
