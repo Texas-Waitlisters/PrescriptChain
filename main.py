@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, render_template
 from users import user
-import accountControl as ac
+import accountcontrol as ac
 
 app = Flask(__name__)
 
